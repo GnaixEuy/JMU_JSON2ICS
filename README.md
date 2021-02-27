@@ -2,7 +2,7 @@
 通过python手工导入集美大学/诚毅学院JSON转换成ICS文件导入日历软件中
 ### 手动解析课程表导入日历
 
-访问--------------来获取修改后的python脚本（该脚本原先由LGkiki编写与GitHub上开源，本次将其修改为我们直接提供json的版本）注意使用pip安装requirement.txt中的依赖
+访问--------------来获取修改后的python脚本（该脚本原先由LGkiki编写与GitHub上开源，本次将其修改为我们直接提供json的版本）注意使用pip安装requirement.txt中的依赖（终端输入 pip install -r requirement.txt）
 
 使用电脑通过webvpn访问课程表应用（以openjmu提供方法即可访问）打开导入界面，目前可见问题是一直在加载第一天选择界面，打开你浏览器的检查器，chrome按F12，接下来以Safari为例!
 [1](/Users/suyuexiang/Desktop/JMUClassScheduleToiCalender(json翻译阉割版)/READEME.assets/1.png)
