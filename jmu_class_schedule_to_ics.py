@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 import requests
 from icalendar import Calendar, Event
 import pytz
@@ -10,42 +11,13 @@ import re
 def sha1(data):
     return hashlib.sha1(data.encode('utf-8')).hexdigest()
 
-
-def get_jmu_sid(username, password):
-    password = sha1(password)
-    request_data = {'flag': 1, 'unitid': 55, 'encrypt': 1, 'imgcode': '',
-                    'account': username, 'appid': '273', 'password': password}
-    request_result = requests.post(
-        'http://oa99.jmu.edu.cn/v2/passport/api/user/login1', request_data)
-    if request_result.status_code != 200:
-        return -1
-    else:
-        return request_result.json()['sid']
-
-
-def get_schedule_to_json(sid, semester):
-    request_result = requests.get(
-        'http://210.34.130.89/CourseSchedule/StudentCourseSchedule?sid={}&semester={}'.format(sid, semester))
-    if request_result.status_code != 200:
-        return -1
-    else:
-        return request_result.json()
-
+# 在这里粘贴你获得的json
+yourjson = {"workID":"201941054017","Name":"苏粤翔","className":"软件1991","courses":[{"couName":"概率论与数理统计","couDayTime":1,"coudeTime":"12","couRoom":"诚毅6-401","couTeaName":"潘蕴静","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-9","three":"n"},{"couName":"软件设计与体系结构（JAVAEE）【中软】","couDayTime":1,"coudeTime":"12","couRoom":"诚毅13-205","couTeaName":"朱鹭山","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"10-15","three":"n"},{"couName":"毛泽东思想和中国特色社会主义理论体系概论","couDayTime":1,"coudeTime":"34","couRoom":"诚毅4-301","couTeaName":"程保锐","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-14","three":"n"},{"couName":"WEB前端开发基础【中软】","couDayTime":1,"coudeTime":"56","couRoom":"诚毅13-205","couTeaName":"张小平","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-15","three":"n"},{"couName":"WEB前端开发基础【中软】","couDayTime":1,"coudeTime":"78","couRoom":"诚毅13-205","couTeaName":"张小平","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-15","three":"n"},{"couName":"大学英语(4)","couDayTime":2,"coudeTime":"12","couRoom":"诚毅1-203","couTeaName":"曾雪梅","className":"软件1991","comboClassName":"软件1991,软件1992","allWeek":"1-15","three":"n"},{"couName":"数据库概论","couDayTime":2,"coudeTime":"34","couRoom":"诚毅9-505","couTeaName":"夏丽丽","className":"软件1991","comboClassName":"软件1991,软件1992","allWeek":"1-15","three":"n"},{"couName":"职业素质与大学生活【中软】（4）","couDayTime":2,"coudeTime":"56","couRoom":"诚毅6-401","couTeaName":"谢中","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"13-14","three":"n"},{"couName":"WEB前端开发基础【中软】","couDayTime":2,"coudeTime":"56","couRoom":"诚毅13-205","couTeaName":"张小平","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"15-15","three":"n"},{"couName":"形势与政策(4)","couDayTime":2,"coudeTime":"78","couRoom":"","couTeaName":"陈利平","className":"软件1991","comboClassName":"电商1991,电商1992,软件1991,软件1992,软件1993,软件1994","allWeek":"9-12","three":"n"},{"couName":"职业素质与大学生活【中软】（4）","couDayTime":2,"coudeTime":"78","couRoom":"诚毅6-401","couTeaName":"谢中","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"13-14","three":"n"},{"couName":"数据库概论","couDayTime":3,"coudeTime":"12","couRoom":"诚毅13-605","couTeaName":"夏丽丽","className":"软件1991","comboClassName":"软件1991,软件1992","allWeek":"1-15","three":"n"},{"couName":"概率论与数理统计","couDayTime":3,"coudeTime":"34","couRoom":"诚毅6-401","couTeaName":"潘蕴静","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-9","three":"n"},{"couName":"WEB前端开发基础【中软】","couDayTime":3,"coudeTime":"34","couRoom":"诚毅13-205","couTeaName":"张小平","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"15-15","three":"n"},{"couName":"毛泽东思想和中国特色社会主义理论体系概论","couDayTime":4,"coudeTime":"12","couRoom":"诚毅4-301","couTeaName":"程保锐","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-14","three":"n"},{"couName":"大学英语(4)","couDayTime":4,"coudeTime":"34","couRoom":"诚毅14-305","couTeaName":"曾雪梅","className":"软件1991","comboClassName":"软件1991,软件1992","allWeek":"1-15","three":"n"},{"couName":"体育与健康(4)","couDayTime":4,"coudeTime":"78","couRoom":"","couTeaName":"篮球场","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-18","three":"n"},{"couName":"软件设计与体系结构（JAVAEE）【中软】","couDayTime":5,"coudeTime":"12","couRoom":"诚毅9-503","couTeaName":"朱鹭山","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"5-10","three":"n"},{"couName":"软件设计与体系结构（JAVAEE）【中软】","couDayTime":5,"coudeTime":"12","couRoom":"诚毅13-205","couTeaName":"朱鹭山","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"11-15","three":"n"},{"couName":"数据库概论","couDayTime":5,"coudeTime":"34","couRoom":"诚毅7-507","couTeaName":"夏丽丽","className":"软件1991","comboClassName":"软件1991,软件1992","allWeek":"1-2","three":"n"},{"couName":"思想政治理论课实践教学","couDayTime":5,"coudeTime":"56","couRoom":"诚毅4-201","couTeaName":"陈利平","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"2-14","three":"n"},{"couName":"软件设计与体系结构（JAVAEE）【中软】","couDayTime":5,"coudeTime":"78","couRoom":"诚毅13-205","couTeaName":"朱鹭山","className":"软件1991","comboClassName":"软件1991,软件1992,软件1993,软件1994","allWeek":"1-15","three":"n"}]}
+# 在这里修改你开学第一周时间
+yourstarttime = '2021-03-01'
 
 def get_semesters_to_json():
-    request_result = requests.get('http://labs.jmu.edu.cn/CourseSchedule/GetSemesters')
-    if request_result.status_code != 200:
-        return -1
-    else:
-        return request_result.json()
-
-
-def parse_semesters_json_to_dict(semesters_json):
-    semesters_dict = {}
-    for item in semesters_json:
-        semesters_dict[item['Code']] = item['Name']
-    return semesters_dict
-
+        return [{"Name":"2020-2021学年第一学期","Code":"20201"},{"Name":"2020-2021学年第二学期","Code":"20202"},{"Name":"2021-2022学年第一个学期","Code":"20211"}]
 
 def get_course_take_weeks(all_week):  # 返回课程上课的周
     course_take_weeks = []
@@ -81,29 +53,10 @@ def get_course_take_time(course_time):  # 返回上课时间
 
 def main():
     time_zone = pytz.timezone('Asia/Shanghai')
-    semesters = get_semesters_to_json()
-    if semesters == -1:
-        print('Program met some wrong, please wait and try again.')
-        exit(1)
-    print('Semesters:')
-    semesters_dict = parse_semesters_json_to_dict(semesters)
-    for semester in semesters:
-        print(semester['Code'], '->', semester['Name'])
-    selester_selected = input('Please select a semester (Just need enter the number before arrow):')
-    if not semesters_dict.__contains__(selester_selected):
-        print('Please select a correct semester!')
-        exit(1)
-    username = input('Please input your JiDaTong username:')
-    password = input('Please input your JiDaTong password:')
-    first_day_date_str = input('Please input first day of term(Format: Year-month-day):')
-    sid = get_jmu_sid(username, password)
-    if sid == -1:
-        print('Your username or password is error, please try again.')
-        exit(1)
-    print('Your JiDaTong sid is:', sid)
-    schedule_json = get_schedule_to_json(sid, selester_selected)
+    first_day_date_str = yourstarttime
+    schedule_json = yourjson
     if schedule_json == -1:
-        print('Program met some wrong, please wait and try again.')
+        print('yourjson 没填')
         exit(1)
     name = schedule_json['Name']
     class_name = schedule_json['className']
