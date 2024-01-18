@@ -1,3 +1,21 @@
+# 配置环境
+## 1. 使用requirements.txt
+
+## 2. 使用
+
+# 如何使用
+从[i集大/教务信息管理系统/我的课表](https://jwxt.jmu.edu.cn/student/for-std/course-table)中,</br>通过打开开发者工具(点击F12/Fn+F12),在network中找到73133</br>
+
+![ijimei.png](READEME.assets%2Fijimei.png)
+![table.png](READEME.assets%2Ftable.png)
+在preview中复制全部并粘贴到本地,另存为json文件</br>
+![copy2local.png](READEME.assets%2Fcopy2local.png)
+复制json文件的路径(方便起见，选择绝对路径),到[jmu_class_schedule_to_ics.py](jmu_class_schedule_to_ics.py)的第78行，替换r"" 中间的内容</br>
+![code-73.png](READEME.assets%2Fcode-73.png)
+在配置环境后python ./jmu_class_schedule_to_ics.py 即可以在项目根目录看到生成的ics文件
+![result.png](READEME.assets%2Fresult.png)
+
+----------------------------
 # 官方已修复问题，本临时解决方案项目结束，当然如果你无聊想折腾看看也是可以>_<
 <hr>
 ~~通过python手工导入集美大学/诚毅学院JSON转换成ICS文件导入日历软件中~~
