@@ -17,6 +17,10 @@ pip install -r requirements.txt
 poetry install
 ```
 # 如何使用
+确认本学期的开学时间</br>
+如果与代码预设不同，在[jmu_class_schedule_to_ics.py](jmu_class_schedule_to_ics.py)的86行进行修改</br>
+![starttime.png](READEME.assets%2Fstarttime.png)
+</br>
 从[i集大/教务信息管理系统/我的课表](https://jwxt.jmu.edu.cn/student/for-std/course-table)中,</br>通过打开开发者工具(点击F12/Fn+F12),在network中找到73133</br>
 
 ![ijimei.png](READEME.assets%2Fijimei.png)
