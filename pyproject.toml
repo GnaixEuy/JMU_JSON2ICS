@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "jmu2ics"
+version = "0.1.0"
+description = ""
+authors = ["betasecoond <nbdhc9039@gmail.coom>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+icalendar = "^5.0.11"
+pytz = "^2023.3.post1"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

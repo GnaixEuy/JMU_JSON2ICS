@@ -1,3 +1,40 @@
+# 项目目的
+为了将自己的课程转到日历或者事项管理软件，例如[Outlook](https://www.microsoft.com/en/microsoft-365/outlook/email-and-calendar-software-microsoft-outlook?deeplink=%2Fowa%2F&sdf=0
+)和[Google Calendar](https://calendar.google.com/)
+# 配置环境
+## 1. 使用[requirements.txt](requirements.txt)
+```python
+# 进入到项目根目录
+pip install -r requirements.txt
+```
+## 2. 使用[pyproject.toml](pyproject.toml)
+```powershell
+# 当你想要安装poetry的时候
+(Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python
+```
+```python
+# 进入到项目根目录
+poetry install
+```
+# 如何使用
+确认本学期的开学时间</br>
+如果与代码预设不同，在[jmu_class_schedule_to_ics.py](jmu_class_schedule_to_ics.py)的86行进行修改</br>
+![starttime.png](READEME.assets%2Fstarttime.png)
+</br>
+从[i集大/教务信息管理系统/我的课表](https://jwxt.jmu.edu.cn/student/for-std/course-table)中,</br>通过打开开发者工具(点击F12/Fn+F12),在network中找到73133</br>
+
+![ijimei.png](READEME.assets%2Fijimei.png)
+![table.png](READEME.assets%2Ftable.png)
+在preview中复制全部并粘贴到本地,另存为json文件</br>
+![copy2local.png](READEME.assets%2Fcopy2local.png)
+复制json文件的路径(方便起见，选择绝对路径),到[jmu_class_schedule_to_ics.py](jmu_class_schedule_to_ics.py)的第78行，替换r"" 中间的内容</br>
+![code-73.png](READEME.assets%2Fcode-73.png)
+在配置环境后python ./jmu_class_schedule_to_ics.py 即可以在项目根目录看到生成的ics文件
+![result.png](READEME.assets%2Fresult.png)
+
+----------------------------
+以下是旧版的说明
+----------------------------
 # 官方已修复问题，本临时解决方案项目结束，当然如果你无聊想折腾看看也是可以>_<
 <hr>
 ~~通过python手工导入集美大学/诚毅学院JSON转换成ICS文件导入日历软件中~~
